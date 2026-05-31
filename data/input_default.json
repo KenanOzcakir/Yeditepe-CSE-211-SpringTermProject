@@ -1,0 +1,33 @@
+{
+  "dictionary": [
+    {"word": "the", "frequency": 1000000},
+    {"word": "their", "frequency": 50000},
+    {"word": "there", "frequency": 45000},
+    {"word": "they", "frequency": 60000},
+    {"word": "hello", "frequency": 30000},
+    {"word": "help", "frequency": 25000},
+    {"word": "world", "frequency": 40000},
+    {"word": "cat", "frequency": 35000},
+    {"word": "car", "frequency": 32000},
+    {"word": "cut", "frequency": 28000},
+    {"word": "cats", "frequency": 15000},
+    {"word": "kitten", "frequency": 12000},
+    {"word": "sitting", "frequency": 18000}
+  ],
+  "check_words": [
+    "hello",
+    "helo",
+    "wrold",
+    "thier",
+    "teh",
+    "cat",
+    "car",
+    "cut",
+    "cats",
+    "kitten",
+    "sitting"
+  ],
+  "max_edit_distance": 2,
+  "max_suggestions": 3
+}
+

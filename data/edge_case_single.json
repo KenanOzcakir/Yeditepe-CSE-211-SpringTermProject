@@ -1,0 +1,12 @@
+{
+  "dictionary": [
+    {"word": "hello", "frequency": 30000}
+  ],
+  "check_words": [
+    "hello",
+    "helo"
+  ],
+  "max_edit_distance": 2,
+  "max_suggestions": 3
+}
+

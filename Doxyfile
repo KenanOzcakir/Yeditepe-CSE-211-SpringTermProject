@@ -1,0 +1,28 @@
+PROJECT_NAME           = "CSE211-PROJ25 Spell Checker"
+PROJECT_BRIEF          = "Trie-based spell checker, corrector, and autocomplete system"
+OUTPUT_DIRECTORY       = docs
+
+INPUT                  = README.md include src frontend
+RECURSIVE              = YES
+EXCLUDE                = frontend/gui/build
+FILE_PATTERNS          = *.h *.hpp *.cpp *.md
+USE_MDFILE_AS_MAINPAGE = README.md
+
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+FULL_PATH_NAMES        = NO
+MARKDOWN_SUPPORT       = YES
+SOURCE_BROWSER         = YES
+
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = NO
+WARN_IF_DOC_ERROR      = YES
+
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+GENERATE_LATEX         = NO
+
+HAVE_DOT               = YES
+UML_LOOK               = YES
+DOT_IMAGE_FORMAT       = png

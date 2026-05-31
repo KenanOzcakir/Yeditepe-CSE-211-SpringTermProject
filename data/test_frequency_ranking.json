@@ -1,0 +1,12 @@
+{
+  "dictionary": [
+    {"word": "their", "frequency": 50000},
+    {"word": "thier", "frequency": 100}
+  ],
+  "check_words": [
+    "thier"
+  ],
+  "max_edit_distance": 1,
+  "max_suggestions": 3
+}
+

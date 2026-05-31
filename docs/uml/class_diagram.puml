@@ -1,0 +1,165 @@
+@startuml
+!theme plain
+
+skinparam classAttributeIconSize 0
+
+class Trie {
+  - root: TrieNode
+  + Trie()
+  + ~Trie()
+  + insert(word: string, frequency: int): void
+  + contains(word: string): bool
+  + findNode(prefix: string): TrieNode
+  + getRoot(): TrieNode
+  - freeNode(node: TrieNode): void
+  - getChild(node: TrieNode, ch: char): TrieNode
+  - addChild(node: TrieNode, ch: char): TrieNode
+}
+
+class TrieNode {
+  + ch: char
+  + isWord: bool
+  + frequency: int
+  + children: LinkedList
+  + TrieNode(c: char)
+}
+
+class LinkedList {
+  - head: ListNode
+  + LinkedList()
+  + ~LinkedList()
+  + getHead(): ListNode
+  + append(value: T): void
+  + insertSorted(value: T, compare: Compare): void
+  + find(pred: Predicate): ListNode
+  + clear(): void
+  + removeLast(): void
+}
+
+class ListNode {
+  + value: T
+  + next: ListNode
+  + ListNode(v: T)
+}
+
+class SpellChecker {
+  - trie: Trie
+  - cacheHead: CacheEntry
+  - cacheSize: int
+  + SpellChecker()
+  + ~SpellChecker()
+  + addDictionaryWord(word: string, frequency: int): void
+  + isWordCorrect(word: string): bool
+  + suggest(word: string, maxEditDistance: int, maxSuggestions: int, buffer: SuggestionBuffer): int
+  + autocomplete(prefix: string, maxSuggestions: int, buffer: SuggestionBuffer): int
+  - searchRecursive(node: TrieNode, target: string, maxEditDistance: int, previousRow: int, buffer: SuggestionBuffer, current: string): void
+  - collectCompletions(node: TrieNode, current: string, buffer: SuggestionBuffer): void
+  - findCached(query: string, maxEditDistance: int, maxSuggestions: int, autocompleteMode: bool): CacheEntry
+  - storeCache(query: string, maxEditDistance: int, maxSuggestions: int, autocompleteMode: bool, buffer: SuggestionBuffer): void
+  - clearCache(): void
+}
+
+class CacheEntry {
+  + query: string
+  + maxEditDistance: int
+  + maxSuggestions: int
+  + autocompleteMode: bool
+  + candidates: Candidate
+  + count: int
+  + next: CacheEntry
+}
+
+class SuggestionBuffer {
+  - list: LinkedList
+  - capacity: int
+  - count: int
+  + SuggestionBuffer(capacity: int)
+  + ~SuggestionBuffer()
+  + tryAdd(cand: Candidate): void
+  + size(): int
+  + get(idx: int): Candidate
+  - isBetter(a: Candidate, b: Candidate): bool
+  - removeLast(): void
+}
+
+class EditDistance {
+  + computeBounded(a: string, b: string, maxDist: int): int
+}
+note right of EditDistance : Static class
+
+class Parser {
+  + loadFromFile(path: string, outData: InputData): bool
+  + loadDictionaryFromFile(path: string, outDictionary: WordEntry, outCount: int): bool
+  + loadCheckWordsFromFile(path: string, outWords: string, outCount: int): bool
+  + free(data: InputData): void
+  - parseDictionaryLine(line: string, entry: WordEntry): bool
+  - parseCheckWord(line: string, wordOut: string): bool
+}
+note right of Parser : Static methods
+
+class InputData {
+  + dictionary: WordEntry
+  + dictionaryCount: int
+  + checkWords: string
+  + checkCount: int
+  + maxEditDistance: int
+  + maxSuggestions: int
+  + InputData()
+}
+
+class Candidate {
+  + word: string
+  + distance: int
+  + frequency: int
+}
+
+class WordEntry {
+  + word: string
+  + frequency: int
+}
+
+class ChildEntry {
+  + ch: char
+  + node: TrieNode
+}
+
+class TuiFunctions {
+  + runInteractive(checker: SpellChecker, maxEditDistance: int, maxSuggestions: int): void
+  + runBatch(checker: SpellChecker, data: InputData): void
+}
+note right of TuiFunctions : Namespace functions
+
+class SpellCheckerWidget {
+  - input: QLineEdit
+  - suggestion1: QPushButton
+  - suggestion2: QPushButton
+  - suggestion3: QPushButton
+  - statusLabel: QLabel
+  + SpellCheckerWidget(parent: QWidget)
+  - updateSuggestions(text: QString): void
+  - setSuggestionButtons(suggestions: string[], count: int): void
+  - replaceLastWord(replacement: QString): void
+}
+note right of SpellCheckerWidget : Qt6 visual frontend
+
+' Relationships
+Trie *-- TrieNode : contains
+TrieNode *-- LinkedList : uses
+LinkedList *-- ListNode : contains
+SpellChecker *-- Trie : uses
+SpellChecker *-- CacheEntry : owns
+SpellChecker ..> SuggestionBuffer : uses
+SpellChecker ..> TrieNode : uses
+CacheEntry *-- Candidate : stores
+SuggestionBuffer *-- LinkedList : uses
+SuggestionBuffer ..> Candidate : contains
+Parser ..> InputData : creates
+InputData *-- WordEntry : contains
+TrieNode *-- ChildEntry : contains
+TrieNode --> TrieNode : children
+TuiFunctions ..> SpellChecker : uses
+TuiFunctions ..> InputData : uses
+SpellCheckerWidget ..> SpellChecker : uses
+SpellChecker ..> EditDistance : uses
+
+@enduml

@@ -1,0 +1,9 @@
+{
+  "dictionary": [],
+  "check_words": [
+    "test"
+  ],
+  "max_edit_distance": 2,
+  "max_suggestions": 3
+}
+

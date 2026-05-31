@@ -1,0 +1,63 @@
+@startuml
+!theme plain
+
+title Spell Checker - Main and GUI Workflow
+
+actor User
+participant Main
+participant Parser
+participant SpellChecker
+participant Cache
+participant Trie
+participant Tui
+participant GUI
+
+User -> Main: Run program
+Main -> Parser: loadFromFile(path)
+Parser --> Main: InputData
+
+Main -> SpellChecker: addDictionaryWord(word, freq)
+SpellChecker -> Trie: insert(word, frequency)
+
+Main -> Tui: runBatch(checker, data)
+Tui -> SpellChecker: isWordCorrect(word)
+SpellChecker -> Trie: contains(word)
+Trie --> SpellChecker: true/false
+SpellChecker --> Tui: Result
+
+alt Word not found
+    Tui -> SpellChecker: suggest(word, maxDist, maxSug)
+    SpellChecker -> Cache: findCached(query)
+    alt Cache hit
+        Cache --> SpellChecker: Cached candidates
+    else Cache miss
+        SpellChecker -> Trie: Fuzzy search
+        Trie --> SpellChecker: Candidates
+        SpellChecker -> Cache: storeCache(candidates)
+    end
+    SpellChecker --> Tui: Suggestions
+    Tui -> User: Display suggestions
+else Word found
+    Tui -> User: "Word is correct"
+end
+
+User -> GUI: Type text
+GUI -> SpellChecker: isWordCorrect(lastWord)
+alt Last word misspelled
+    GUI -> SpellChecker: suggest(lastWord, maxDist, maxSug)
+    SpellChecker -> Cache: findCached(query)
+    SpellChecker --> GUI: Ranked corrections
+    GUI -> User: Show correction buttons
+else Last word valid or prefix
+    GUI -> SpellChecker: autocomplete(lastWord, maxSug)
+    SpellChecker -> Cache: findCached(prefix)
+    alt Cache miss
+        SpellChecker -> Trie: findNode(prefix)
+        Trie --> SpellChecker: Prefix node
+        SpellChecker -> Cache: storeCache(completions)
+    end
+    SpellChecker --> GUI: Ranked completions
+    GUI -> User: Show autocomplete buttons
+end
+
+@enduml

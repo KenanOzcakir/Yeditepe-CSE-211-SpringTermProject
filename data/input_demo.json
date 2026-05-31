@@ -1,0 +1,20 @@
+{
+  "dictionary": [
+    {"word": "the", "frequency": 1000000},
+    {"word": "their", "frequency": 50000},
+    {"word": "there", "frequency": 45000},
+    {"word": "they", "frequency": 60000},
+    {"word": "thier", "frequency": 100},
+    {"word": "cat", "frequency": 35000},
+    {"word": "car", "frequency": 32000},
+    {"word": "cut", "frequency": 28000}
+  ],
+  "check_words": [
+    "thier",
+    "cat",
+    "car"
+  ],
+  "max_edit_distance": 2,
+  "max_suggestions": 3
+}
+

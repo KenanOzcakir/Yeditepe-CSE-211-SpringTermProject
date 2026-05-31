@@ -1,0 +1,67 @@
+# Build artifacts
+*.o
+*.exe
+*.out
+spellcheck
+test_runner
+*.a
+*.so
+*.dylib
+
+# CMake build directories
+build/
+*/build/
+frontend/gui/build/
+spell_gui/build/
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+build/Makefile
+*/build/Makefile
+*.cmake
+!CMakeLists.txt
+
+# Qt generated files
+*_autogen/
+*.moc
+*.moc.cpp
+moc_*.cpp
+qrc_*.cpp
+ui_*.h
+
+# Documentation (generated)
+docs/html/
+docs/latex/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test artifacts
+*.gcov
+*.gcda
+*.gcno
+
+# Temporary files
+*.tmp
+*.log
+*.cache
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Backup files
+*.bak
+*.orig
+*~

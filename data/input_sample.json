@@ -1,0 +1,21 @@
+{
+  "dictionary": [
+    {"word": "their", "frequency": 50000},
+    {"word": "there", "frequency": 45000},
+    {"word": "they", "frequency": 60000},
+    {"word": "hello", "frequency": 30000},
+    {"word": "help", "frequency": 25000},
+    {"word": "world", "frequency": 40000}
+  ],
+  "check_words": [
+    "hello",
+    "helo",
+    "wrold",
+    "thier",
+    "teh"
+  ],
+  "max_edit_distance": 2,
+  "max_suggestions": 3
+}
+
+
