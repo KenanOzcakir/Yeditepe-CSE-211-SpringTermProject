@@ -10,6 +10,13 @@ A C++ spell checker application that uses a **Trie** (prefix tree) for efficient
 - **Course**: CSE 211 - Data Structures
 - **Semester**: 2025-2026 Spring
 
+| Member | Role |
+| :-- | :-- |
+| Kenan Özçakır | Project Leader; integration, build/release coordination, final verification |
+| Ayberk Şensöz | Data Structures Engineer; Trie/LinkedList implementation and memory-management support |
+| Kerem Köse | Algorithms & Testing Engineer; edit-distance workflow, ranking behavior, unit/integration tests |
+| Emirhan Demir | Frontend & Documentation Coordinator; Qt GUI workflow, user documentation, presentation support |
+
 ## Build Instructions
 
 ### Prerequisites
